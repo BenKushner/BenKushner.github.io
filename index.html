@@ -16,10 +16,14 @@
   }
   html { scroll-behavior: smooth; }
   body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; cursor: default; }
+
   .cursor-dot { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.15s ease, opacity 0.15s ease; transform: translate(-50%, -50%); mix-blend-mode: screen; opacity: 0; }
   .cursor-dot.visible { opacity: 1; }
   .cursor-dot.hovering { transform: translate(-50%, -50%) scale(3.5); background: var(--accent-glow); opacity: 0.5; }
+
   body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9998; }
+
+  /* Nav */
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, var(--bg) 60%, transparent); }
   .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--accent); letter-spacing: 0.02em; text-decoration: none; }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
@@ -27,26 +31,33 @@
   .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; background: var(--accent); transition: width 0.3s ease; }
   .nav-links a:hover { color: var(--text); }
   .nav-links a:hover::after { width: 100%; }
+
   section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
   .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 1rem; font-weight: 500; }
+
+  /* Hero */
   .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 5rem; position: relative; }
   .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.08; font-weight: 400; margin-bottom: 1.5rem; color: var(--text); }
   .hero h1 .accent { color: var(--accent); }
-  .hero-sub { font-size: 1.15rem; color: var(--text-dim); max-width: 500px; font-weight: 300; line-height: 1.7; margin-bottom: 2.5rem; }
+  .hero-sub { font-size: 1.15rem; color: var(--text-dim); max-width: 520px; font-weight: 300; line-height: 1.7; margin-bottom: 2.5rem; }
   .hero-cta { display: inline-flex; align-items: center; gap: 0.75rem; background: var(--accent-deep); color: var(--bg); padding: 0.85rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; border: none; cursor: pointer; }
   .hero-cta:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212, 165, 116, 0.2); }
   .hero-cta svg { transition: transform 0.3s ease; }
   .hero-cta:hover svg { transform: translateX(3px); }
+
   .hero-shapes { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 400px; height: 400px; pointer-events: none; }
   .shape { position: absolute; border-radius: var(--radius); opacity: 0.12; animation: float 8s ease-in-out infinite; }
   .shape-1 { width: 180px; height: 180px; background: var(--accent); top: 20%; right: 10%; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
   .shape-2 { width: 120px; height: 120px; border: 2px solid var(--accent); top: 50%; right: 40%; animation-delay: -2s; border-radius: 50%; background: none; }
   .shape-3 { width: 80px; height: 80px; background: var(--accent-deep); top: 15%; right: 55%; animation-delay: -4s; border-radius: 50% 50% 50% 0; }
   @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 33% { transform: translateY(-15px) rotate(3deg); } 66% { transform: translateY(10px) rotate(-2deg); } }
+
   .scroll-hint { position: absolute; bottom: 3rem; left: 3rem; display: flex; align-items: center; gap: 1rem; color: var(--text-dim); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
   .scroll-line { width: 40px; height: 1px; background: var(--accent); position: relative; overflow: hidden; }
   .scroll-line::after { content: ''; position: absolute; inset: 0; background: var(--bg); animation: scrollPulse 2s ease-in-out infinite; }
   @keyframes scrollPulse { 0% { transform: translateX(-100%); } 50% { transform: translateX(100%); } 100% { transform: translateX(100%); } }
+
+  /* About */
   .about-grid { display: grid; grid-template-columns: auto 1fr 1fr; gap: 3rem; align-items: start; }
   .about-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; object-position: center top; border: 3px solid var(--border); transition: border-color 0.3s ease; flex-shrink: 0; }
   .about-photo:hover { border-color: var(--accent); }
@@ -55,8 +66,11 @@
   .skills-cloud { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
   .skill-tag { padding: 0.5rem 1.1rem; border: 1px solid var(--border); border-radius: 50px; font-size: 0.82rem; color: var(--text-dim); transition: all 0.3s ease; cursor: default; }
   .skill-tag:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(212, 165, 116, 0.1); }
+
+  /* Projects */
   .projects h2 { font-family: 'DM Serif Display', serif; font-size: 2.5rem; margin-bottom: 3rem; font-weight: 400; }
-  .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.8rem; }
+
+  /* Featured */
   .project-featured { display: grid; grid-template-columns: 1.2fr 1fr; gap: 0; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; cursor: pointer; text-decoration: none; color: inherit; margin-bottom: 1.8rem; }
   .project-featured:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); border-color: var(--accent-deep); }
   .project-featured .project-thumb { width: 100%; height: 100%; min-height: 280px; background: var(--bg-warm); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -72,31 +86,64 @@
   .stat { display: flex; flex-direction: column; }
   .stat-value { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--accent); }
   .stat-label { font-size: 0.72rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+
   .project-tag { font-size: 0.72rem; padding: 0.3rem 0.7rem; border-radius: 50px; background: rgba(212, 165, 116, 0.08); color: var(--accent); letter-spacing: 0.03em; }
   .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .project-card { background: var(--bg-card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; cursor: pointer; position: relative; }
+
+  /* Subsection labels */
+  .subsection-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); margin: 2.5rem 0 1.2rem; font-weight: 500; }
+
+  /* Standard Cards */
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.8rem; }
+
+  .project-card { background: var(--bg-card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; cursor: pointer; position: relative; text-decoration: none; color: inherit; display: block; }
   .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); border-color: var(--accent-deep); }
+
   .project-thumb { width: 100%; aspect-ratio: 16 / 10; background: var(--bg-warm); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
   .project-thumb-icon { font-size: 3rem; opacity: 0.3; transition: opacity 0.3s ease, transform 0.3s ease; }
   .project-card:hover .project-thumb-icon { opacity: 0.6; transform: scale(1.1); }
   .project-thumb::after { content: 'Learn More →'; position: absolute; inset: 0; background: rgba(212, 165, 116, 0.15); backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; color: var(--accent-glow); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.08em; opacity: 0; transition: opacity 0.3s ease; }
   .project-card:hover .project-thumb::after { opacity: 1; }
+
   .project-info { padding: 1.5rem; }
   .project-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.25rem; margin-bottom: 0.5rem; font-weight: 400; }
   .project-info p { color: var(--text-dim); font-size: 0.88rem; font-weight: 300; line-height: 1.6; margin-bottom: 1rem; }
+
+  /* Mini Cards for itch games */
+  .mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+
+  .mini-card { background: var(--bg-card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+  .mini-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); border-color: var(--accent-deep); }
+
+  .mini-thumb { width: 100%; aspect-ratio: 16 / 10; background: var(--bg-warm); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .mini-thumb-icon { font-size: 2rem; opacity: 0.3; transition: opacity 0.3s ease, transform 0.3s ease; }
+  .mini-card:hover .mini-thumb-icon { opacity: 0.6; transform: scale(1.15); }
+  .mini-thumb::after { content: 'Play →'; position: absolute; inset: 0; background: rgba(212, 165, 116, 0.15); backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; color: var(--accent-glow); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.08em; opacity: 0; transition: opacity 0.3s ease; }
+  .mini-card:hover .mini-thumb::after { opacity: 1; }
+
+  .mini-info { padding: 0.9rem 1rem; }
+  .mini-info h4 { font-family: 'DM Serif Display', serif; font-size: 0.95rem; font-weight: 400; margin-bottom: 0.2rem; }
+  .mini-info span { font-size: 0.72rem; color: var(--text-dim); font-weight: 300; }
+
+  /* More link */
   .more-games { text-align: center; margin-top: 2.5rem; }
   .more-games a { color: var(--text-dim); text-decoration: none; font-size: 0.9rem; padding: 0.7rem 1.8rem; border: 1px solid var(--border); border-radius: 50px; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.6rem; }
   .more-games a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* Contact */
   .contact { text-align: center; padding: 8rem 3rem; }
   .contact h2 { font-family: 'DM Serif Display', serif; font-size: 3rem; margin-bottom: 1rem; font-weight: 400; }
   .contact p { color: var(--text-dim); font-weight: 300; max-width: 450px; margin: 0 auto 2.5rem; font-size: 1.05rem; }
   .contact-links { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
   .contact-link { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.6rem; border: 1px solid var(--border); border-radius: 50px; color: var(--text-dim); text-decoration: none; font-size: 0.88rem; font-weight: 400; transition: all 0.3s ease; }
   .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 165, 116, 0.1); }
+
   footer { text-align: center; padding: 2rem 3rem; color: var(--text-dim); font-size: 0.78rem; border-top: 1px solid var(--border); max-width: 1100px; margin: 0 auto; }
+
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .tilt-card { transform-style: preserve-3d; perspective: 800px; }
+
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     section { padding: 4rem 1.5rem; }
@@ -108,6 +155,7 @@
     .project-featured { grid-template-columns: 1fr; }
     .project-featured .project-thumb { min-height: 200px; }
     .project-featured .project-info { padding: 1.5rem; }
+    .mini-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
     .scroll-hint { display: none; }
     .cursor-dot { display: none; }
     .contact { padding: 5rem 1.5rem; }
@@ -117,6 +165,7 @@
 </head>
 <body>
 <div class="cursor-dot" id="cursorDot"></div>
+
 <nav>
   <a href="#" class="nav-logo">Benjamin Kushner</a>
   <ul class="nav-links">
@@ -125,6 +174,7 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
+
 <section class="hero" id="hero">
   <div class="hero-shapes"><div class="shape shape-1"></div><div class="shape shape-2"></div><div class="shape shape-3"></div></div>
   <p class="section-label reveal">Game Developer & Producer</p>
@@ -133,6 +183,7 @@
   <a href="#projects" class="hero-cta reveal" style="transition-delay: 0.3s">See my work <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
   <div class="scroll-hint"><div class="scroll-line"></div>Scroll to explore</div>
 </section>
+
 <section class="about" id="about">
   <p class="section-label reveal">About Me</p>
   <div class="about-grid">
@@ -140,7 +191,7 @@
     <div>
       <h2 class="reveal">A bit about<br>who I am</h2>
       <p class="reveal">Hey! I'm a graduating senior in RPI's Games and Simulation Arts and Sciences program with a passion for making games people actually want to play. I love the intersection of creative storytelling and technical problem-solving.</p>
-      <p class="reveal">I've shipped a multiplayer game on Steam with 5,000+ downloads, led teams as a technical director and co-producer, and have been building games since 2020. I'm always looking for the next challenge.</p>
+      <p class="reveal">I've shipped a multiplayer game on Steam with 5,000+ downloads, published 3 games on the iOS App Store, and have been building games since 2020. I'm always looking for the next challenge.</p>
     </div>
     <div>
       <p class="section-label reveal">Tools & Skills</p>
@@ -152,6 +203,7 @@
         <span class="skill-tag">Game Design</span>
         <span class="skill-tag">Level Design</span>
         <span class="skill-tag">UI/UX</span>
+        <span class="skill-tag">Mobile Development</span>
         <span class="skill-tag">Production</span>
         <span class="skill-tag">Technical Direction</span>
         <span class="skill-tag">Git</span>
@@ -159,9 +211,12 @@
     </div>
   </div>
 </section>
+
 <section class="projects" id="projects">
   <p class="section-label reveal">Selected Work</p>
   <h2 class="reveal">Things I've built</h2>
+
+  <!-- FEATURED: Steam -->
   <a class="project-featured tilt-card reveal" href="low-poly-mouse-game.html">
     <div class="project-thumb"><span class="project-thumb-icon">🐭</span></div>
     <div class="project-info">
@@ -178,13 +233,84 @@
       </div>
     </div>
   </a>
-  <div class="project-grid">
-    <a class="project-card tilt-card reveal" href="#" style="text-decoration:none; color:inherit;"><div class="project-thumb"><span class="project-thumb-icon">🎮</span></div><div class="project-info"><h3>Your Itch Game Here</h3><p>Pick one of your itch.io games to feature here. Choose one that shows a different skill than the Steam game.</p><div class="project-tags"><span class="project-tag">Engine</span><span class="project-tag">Genre</span></div></div></a>
-    <a class="project-card tilt-card reveal" href="#" style="text-decoration:none; color:inherit;"><div class="project-thumb"><span class="project-thumb-icon">🎮</span></div><div class="project-info"><h3>Your Itch Game Here</h3><p>Another itch.io game. Try to pick projects that show your range — different genres, mechanics, or roles.</p><div class="project-tags"><span class="project-tag">Engine</span><span class="project-tag">Genre</span></div></div></a>
-    <a class="project-card tilt-card reveal" href="#" style="text-decoration:none; color:inherit;"><div class="project-thumb"><span class="project-thumb-icon">🎮</span></div><div class="project-info"><h3>Your Itch Game Here</h3><p>A third itch.io game to round out your portfolio. You can always add or remove cards later.</p><div class="project-tags"><span class="project-tag">Engine</span><span class="project-tag">Genre</span></div></div></a>
+
+  <!-- APP STORE GAMES -->
+  <p class="subsection-label reveal">App Store</p>
+  <div class="project-grid reveal">
+    <a class="project-card tilt-card" href="https://apps.apple.com/us/app/bouncy-towers/id6449136906" target="_blank">
+      <div class="project-thumb"><span class="project-thumb-icon">🏗️</span></div>
+      <div class="project-info">
+        <h3>Bouncy Towers</h3>
+        <p>Match the ball color to the tower top and bounce as long as you can. Speed ramps up, colors shift faster, and a global leaderboard tracks the best. 4.6 stars on the App Store.</p>
+        <div class="project-tags">
+          <span class="project-tag">Unity</span><span class="project-tag">C#</span><span class="project-tag">iOS</span><span class="project-tag">Casual</span>
+        </div>
+      </div>
+    </a>
+    <a class="project-card tilt-card" href="https://apps.apple.com/us/app/hoops-gm/id6747779842" target="_blank">
+      <div class="project-thumb"><span class="project-thumb-icon">🏀</span></div>
+      <div class="project-info">
+        <h3>Hoops GM</h3>
+        <p>A deep basketball management sim. Build a roster, navigate free agency, simulate games with play-by-play, and climb through 5 league tiers with a prestige system.</p>
+        <div class="project-tags">
+          <span class="project-tag">Unity</span><span class="project-tag">C#</span><span class="project-tag">iOS</span><span class="project-tag">Simulation</span>
+        </div>
+      </div>
+    </a>
+    <a class="project-card tilt-card" href="https://apps.apple.com/us/app/high-fly/id1639057603" target="_blank">
+      <div class="project-thumb"><span class="project-thumb-icon">🚀</span></div>
+      <div class="project-info">
+        <h3>High Fly</h3>
+        <p>An infinite runner jetpack adventure. Dodge obstacles, manage fuel, collect jetpacks, complete achievements, and compete on the online leaderboard. 5.0 stars.</p>
+        <div class="project-tags">
+          <span class="project-tag">Unity</span><span class="project-tag">C#</span><span class="project-tag">iOS</span><span class="project-tag">Adventure</span>
+        </div>
+      </div>
+    </a>
   </div>
-  <div class="more-games reveal"><a href="https://pbjkush.itch.io/" target="_blank">View all games on Itch.io <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a></div>
+
+  <!-- ITCH.IO GAMES -->
+  <p class="subsection-label reveal">Itch.io</p>
+  <div class="mini-grid reveal">
+    <a class="mini-card" href="https://pbjkush.itch.io/track-maniac" target="_blank">
+      <div class="mini-thumb"><span class="mini-thumb-icon">🏎️</span></div>
+      <div class="mini-info"><h4>Tinker Track</h4><span>Racing · Play in browser</span></div>
+    </a>
+    <a class="mini-card" href="https://pbjkush.itch.io/something-goes-wrong" target="_blank">
+      <div class="mini-thumb"><span class="mini-thumb-icon">📖</span></div>
+      <div class="mini-info"><h4>Something Goes Wrong</h4><span>Interactive Fiction · Play in browser</span></div>
+    </a>
+    <a class="mini-card" href="https://pbjkush.itch.io/remroftalp" target="_blank">
+      <div class="mini-thumb"><span class="mini-thumb-icon">🔄</span></div>
+      <div class="mini-info"><h4>remroftalP</h4><span>Puzzle · Play in browser</span></div>
+    </a>
+    <a class="mini-card" href="https://pbjkush.itch.io/underwater-accomplice" target="_blank">
+      <div class="mini-thumb"><span class="mini-thumb-icon">🐟</span></div>
+      <div class="mini-info"><h4>Underwater Accomplice</h4><span>Shooter · Play in browser</span></div>
+    </a>
+    <a class="mini-card" href="https://pbjkush.itch.io/dolphania" target="_blank">
+      <div class="mini-thumb"><span class="mini-thumb-icon">🐬</span></div>
+      <div class="mini-info"><h4>Dolphania</h4><span>Adventure · Play in browser</span></div>
+    </a>
+    <a class="mini-card" href="https://pbjkush.itch.io/other-half" target="_blank">
+      <div class="mini-thumb"><span class="mini-thumb-icon">🧩</span></div>
+      <div class="mini-info"><h4>The Other Half</h4><span>Puzzle · Play in browser</span></div>
+    </a>
+    <a class="mini-card" href="https://pbjkush.itch.io/shuffled-tales" target="_blank">
+      <div class="mini-thumb"><span class="mini-thumb-icon">🃏</span></div>
+      <div class="mini-info"><h4>Shuffled Tales</h4><span>Simulation · Play in browser</span></div>
+    </a>
+    <a class="mini-card" href="https://pbjkush.itch.io/togather" target="_blank">
+      <div class="mini-thumb"><span class="mini-thumb-icon">🌾</span></div>
+      <div class="mini-info"><h4>Togather</h4><span>Simulation · Play in browser</span></div>
+    </a>
+  </div>
+
+  <div class="more-games reveal">
+    <a href="https://pbjkush.itch.io/" target="_blank">View all games on Itch.io <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg></a>
+  </div>
 </section>
+
 <section class="contact" id="contact">
   <p class="section-label reveal">Get in Touch</p>
   <h2 class="reveal">Let's make<br>something together.</h2>
@@ -195,13 +321,15 @@
     <a href="https://www.linkedin.com/in/benkush/" class="contact-link" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
   </div>
 </section>
+
 <footer><p>Built with care · © 2026 Benjamin Kushner</p></footer>
+
 <script>
   const dot=document.getElementById('cursorDot');let mouseX=0,mouseY=0,dotX=0,dotY=0;
   document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;dot.classList.add('visible')});
   document.addEventListener('mouseleave',()=>dot.classList.remove('visible'));
   function animateCursor(){dotX+=(mouseX-dotX)*0.15;dotY+=(mouseY-dotY)*0.15;dot.style.left=dotX+'px';dot.style.top=dotY+'px';requestAnimationFrame(animateCursor)}animateCursor();
-  document.querySelectorAll('a,button,.skill-tag,.project-card,.project-featured').forEach(el=>{el.addEventListener('mouseenter',()=>dot.classList.add('hovering'));el.addEventListener('mouseleave',()=>dot.classList.remove('hovering'))});
+  document.querySelectorAll('a,button,.skill-tag,.project-card,.project-featured,.mini-card').forEach(el=>{el.addEventListener('mouseenter',()=>dot.classList.add('hovering'));el.addEventListener('mouseleave',()=>dot.classList.remove('hovering'))});
   const reveals=document.querySelectorAll('.reveal');const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});reveals.forEach(el=>observer.observe(el));
   document.querySelectorAll('.tilt-card').forEach(card=>{card.addEventListener('mousemove',e=>{const rect=card.getBoundingClientRect();const x=e.clientX-rect.left;const y=e.clientY-rect.top;const centerX=rect.width/2;const centerY=rect.height/2;const rotateX=((y-centerY)/centerY)*-4;const rotateY=((x-centerX)/centerX)*4;card.style.transform=`translateY(-6px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`});card.addEventListener('mouseleave',()=>{card.style.transform='translateY(0) rotateX(0) rotateY(0)'})});
   document.addEventListener('mousemove',e=>{const shapes=document.querySelectorAll('.shape');const x=(e.clientX/window.innerWidth-0.5)*2;const y=(e.clientY/window.innerHeight-0.5)*2;shapes.forEach((shape,i)=>{const speed=(i+1)*8;shape.style.transform=`translate(${x*speed}px, ${y*speed}px)`})});
