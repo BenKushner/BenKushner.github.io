@@ -33,7 +33,6 @@
     cursor: default;
   }
 
-  /* ── Custom Cursor Dot ── */
   .cursor-dot {
     width: 10px; height: 10px;
     background: var(--accent);
@@ -53,7 +52,6 @@
     opacity: 0.5;
   }
 
-  /* ── Grain Overlay ── */
   body::after {
     content: '';
     position: fixed;
@@ -63,7 +61,6 @@
     z-index: 9998;
   }
 
-  /* ── Navigation ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -73,7 +70,6 @@
     justify-content: space-between;
     align-items: center;
     background: linear-gradient(to bottom, var(--bg) 60%, transparent);
-    transition: padding 0.3s ease;
   }
 
   .nav-logo {
@@ -107,7 +103,6 @@
   .nav-links a:hover { color: var(--text); }
   .nav-links a:hover::after { width: 100%; }
 
-  /* ── Sections ── */
   section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
 
   .section-label {
@@ -119,7 +114,6 @@
     font-weight: 500;
   }
 
-  /* ── Hero ── */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -172,7 +166,6 @@
   .hero-cta svg { transition: transform 0.3s ease; }
   .hero-cta:hover svg { transform: translateX(3px); }
 
-  /* Floating shapes in hero */
   .hero-shapes {
     position: absolute;
     right: 0; top: 50%;
@@ -191,7 +184,6 @@
     width: 180px; height: 180px;
     background: var(--accent);
     top: 20%; right: 10%;
-    animation-delay: 0s;
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
   }
   .shape-2 {
@@ -216,11 +208,9 @@
     66% { transform: translateY(10px) rotate(-2deg); }
   }
 
-  /* ── Scroll indicator ── */
   .scroll-hint {
     position: absolute;
-    bottom: 3rem;
-    left: 3rem;
+    bottom: 3rem; left: 3rem;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -248,7 +238,6 @@
     100% { transform: translateX(100%); }
   }
 
-  /* ── About ── */
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -293,7 +282,6 @@
     box-shadow: 0 4px 15px rgba(212, 165, 116, 0.1);
   }
 
-  /* ── Projects ── */
   .projects h2 {
     font-family: 'DM Serif Display', serif;
     font-size: 2.5rem;
@@ -307,6 +295,130 @@
     gap: 1.8rem;
   }
 
+  /* ── Featured Project ── */
+  .project-featured {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    margin-bottom: 1.8rem;
+  }
+  .project-featured:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    border-color: var(--accent-deep);
+  }
+
+  .project-featured .project-thumb {
+    width: 100%; height: 100%;
+    min-height: 280px;
+    background: var(--bg-warm);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-featured .project-thumb-icon {
+    font-size: 5rem;
+    opacity: 0.3;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .project-featured:hover .project-thumb-icon {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+
+  .project-featured .project-thumb::after {
+    content: 'View on Steam →';
+    position: absolute;
+    inset: 0;
+    background: rgba(212, 165, 116, 0.15);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-glow);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .project-featured:hover .project-thumb::after { opacity: 1; }
+
+  .project-featured .project-info {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .project-featured .project-info h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+  }
+
+  .featured-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+
+  .project-featured .project-info p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+
+  .project-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .stat { display: flex; flex-direction: column; }
+
+  .stat-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .project-tag {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 50px;
+    background: rgba(212, 165, 116, 0.08);
+    color: var(--accent);
+    letter-spacing: 0.03em;
+  }
+
+  .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  /* ── Standard Cards ── */
   .project-card {
     background: var(--bg-card);
     border-radius: var(--radius);
@@ -378,22 +490,29 @@
     margin-bottom: 1rem;
   }
 
-  .project-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+  .more-games {
+    text-align: center;
+    margin-top: 2.5rem;
   }
 
-  .project-tag {
-    font-size: 0.72rem;
-    padding: 0.3rem 0.7rem;
+  .more-games a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.7rem 1.8rem;
+    border: 1px solid var(--border);
     border-radius: 50px;
-    background: rgba(212, 165, 116, 0.08);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .more-games a:hover {
+    border-color: var(--accent);
     color: var(--accent);
-    letter-spacing: 0.03em;
+    transform: translateY(-2px);
   }
 
-  /* ── Contact ── */
   .contact {
     text-align: center;
     padding: 8rem 3rem;
@@ -441,7 +560,6 @@
     box-shadow: 0 6px 20px rgba(212, 165, 116, 0.1);
   }
 
-  /* ── Footer ── */
   footer {
     text-align: center;
     padding: 2rem 3rem;
@@ -452,7 +570,6 @@
     margin: 0 auto;
   }
 
-  /* ── Reveal Animations ── */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -463,13 +580,11 @@
     transform: translateY(0);
   }
 
-  /* ── Interactive tilt on cards ── */
   .tilt-card {
     transform-style: preserve-3d;
     perspective: 800px;
   }
 
-  /* ── Mobile ── */
   @media (max-width: 768px) {
     nav { padding: 1.2rem 1.5rem; }
     section { padding: 4rem 1.5rem; }
@@ -477,6 +592,9 @@
     .hero-shapes { display: none; }
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .project-grid { grid-template-columns: 1fr; }
+    .project-featured { grid-template-columns: 1fr; }
+    .project-featured .project-thumb { min-height: 200px; }
+    .project-featured .project-info { padding: 1.5rem; }
     .scroll-hint { display: none; }
     .cursor-dot { display: none; }
     .contact { padding: 5rem 1.5rem; }
@@ -490,10 +608,8 @@
 </head>
 <body>
 
-<!-- Custom Cursor -->
 <div class="cursor-dot" id="cursorDot"></div>
 
-<!-- Navigation -->
 <nav>
   <a href="#" class="nav-logo">Benjamin Kushner</a>
   <ul class="nav-links">
@@ -503,7 +619,6 @@
   </ul>
 </nav>
 
-<!-- Hero -->
 <section class="hero" id="hero">
   <div class="hero-shapes">
     <div class="shape shape-1"></div>
@@ -511,7 +626,7 @@
     <div class="shape shape-3"></div>
   </div>
 
-  <p class="section-label reveal">Game Developer & Designer</p>
+  <p class="section-label reveal">Game Developer & Producer</p>
   <h1 class="reveal" style="transition-delay: 0.1s">
     Crafting worlds<br>
     worth <span class="accent">exploring.</span>
@@ -531,21 +646,22 @@
   </div>
 </section>
 
-<!-- About -->
 <section class="about" id="about">
   <p class="section-label reveal">About Me</p>
   <div class="about-grid">
     <div>
       <h2 class="reveal">A bit about<br>who I am</h2>
       <p class="reveal">
-        Hey! I'm a soon-to-be graduate with a passion for making games
-        that people actually want to play. I love the intersection of
-        creative storytelling and technical problem-solving.
+        Hey! I'm a graduating senior in RPI's Games and Simulation Arts
+        and Sciences program with a passion for making games people
+        actually want to play. I love the intersection of creative
+        storytelling and technical problem-solving.
       </p>
       <p class="reveal">
-        When I'm not building games, you'll find me participating in
-        game jams, sketching level designs, or diving into what makes
-        great game feel so satisfying to play.
+        I've shipped a multiplayer game on Steam with 5,000+ downloads,
+        led teams as a technical director and co-producer, and have been
+        building games since 2020. I'm always looking for the next
+        challenge.
       </p>
     </div>
     <div>
@@ -555,23 +671,59 @@
         <span class="skill-tag">Unreal Engine</span>
         <span class="skill-tag">C#</span>
         <span class="skill-tag">C++</span>
-        <span class="skill-tag">Godot</span>
-        <span class="skill-tag">Blender</span>
-        <span class="skill-tag">Pixel Art</span>
         <span class="skill-tag">Game Design</span>
         <span class="skill-tag">Level Design</span>
         <span class="skill-tag">UI/UX</span>
-        <span class="skill-tag">Shader Programming</span>
+        <span class="skill-tag">Production</span>
+        <span class="skill-tag">Technical Direction</span>
         <span class="skill-tag">Git</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Projects -->
 <section class="projects" id="projects">
   <p class="section-label reveal">Selected Work</p>
   <h2 class="reveal">Things I've built</h2>
+
+  <!-- Featured: Steam Game -->
+  <a class="project-featured tilt-card reveal" href="https://store.steampowered.com/app/4149620/Low_Poly_Mouse_Game/" target="_blank">
+    <div class="project-thumb">
+      <span class="project-thumb-icon">🐭</span>
+    </div>
+    <div class="project-info">
+      <p class="featured-label">Featured · Steam Release</p>
+      <h3>Low Poly Mouse Game</h3>
+      <p>
+        2–4 sneaky low-poly mice face off against a lone cat in a human house.
+        Mice use proximity chat to coordinate while completing tasks to destroy the house,
+        and the cat hunts by sound and trails. Built as a senior capstone with a 10-person team.
+      </p>
+      <div class="project-stats">
+        <div class="stat">
+          <span class="stat-value">5,000+</span>
+          <span class="stat-label">Downloads</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">96%</span>
+          <span class="stat-label">Positive Reviews</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">10</span>
+          <span class="stat-label">Person Team</span>
+        </div>
+      </div>
+      <div class="project-tags">
+        <span class="project-tag">Unity</span>
+        <span class="project-tag">C#</span>
+        <span class="project-tag">Multiplayer</span>
+        <span class="project-tag">Technical Director</span>
+        <span class="project-tag">Co-Producer</span>
+      </div>
+    </div>
+  </a>
+
+  <!-- Itch.io Games — Replace these placeholders -->
   <div class="project-grid">
 
     <a class="project-card tilt-card reveal" href="#" target="_blank" style="text-decoration:none; color:inherit;">
@@ -579,50 +731,53 @@
         <span class="project-thumb-icon">🎮</span>
       </div>
       <div class="project-info">
-        <h3>Project One</h3>
-        <p>A brief description of the game — what it's about, what makes it special, and what you did on it.</p>
+        <h3>Your Itch Game Here</h3>
+        <p>Pick one of your itch.io games to feature here. Choose one that shows a different skill than the Steam game.</p>
         <div class="project-tags">
-          <span class="project-tag">Unity</span>
-          <span class="project-tag">C#</span>
-          <span class="project-tag">2D Platformer</span>
+          <span class="project-tag">Engine</span>
+          <span class="project-tag">Genre</span>
         </div>
       </div>
     </a>
 
     <a class="project-card tilt-card reveal" href="#" target="_blank" style="text-decoration:none; color:inherit;">
       <div class="project-thumb">
-        <span class="project-thumb-icon">🌍</span>
+        <span class="project-thumb-icon">🎮</span>
       </div>
       <div class="project-info">
-        <h3>Project Two</h3>
-        <p>Another game you've made. Replace this with real details about the project, your role, and the outcome.</p>
+        <h3>Your Itch Game Here</h3>
+        <p>Another itch.io game. Try to pick projects that show your range — different genres, mechanics, or roles.</p>
         <div class="project-tags">
-          <span class="project-tag">Godot</span>
-          <span class="project-tag">GDScript</span>
-          <span class="project-tag">Puzzle</span>
+          <span class="project-tag">Engine</span>
+          <span class="project-tag">Genre</span>
         </div>
       </div>
     </a>
 
     <a class="project-card tilt-card reveal" href="#" target="_blank" style="text-decoration:none; color:inherit;">
       <div class="project-thumb">
-        <span class="project-thumb-icon">⚔️</span>
+        <span class="project-thumb-icon">🎮</span>
       </div>
       <div class="project-info">
-        <h3>Project Three</h3>
-        <p>A third project — maybe a game jam entry, a prototype, or a collaborative piece. Describe it here.</p>
+        <h3>Your Itch Game Here</h3>
+        <p>A third itch.io game to round out your portfolio. You can always add or remove cards later.</p>
         <div class="project-tags">
-          <span class="project-tag">Unreal</span>
-          <span class="project-tag">C++</span>
-          <span class="project-tag">Game Jam</span>
+          <span class="project-tag">Engine</span>
+          <span class="project-tag">Genre</span>
         </div>
       </div>
     </a>
 
   </div>
+
+  <div class="more-games reveal">
+    <a href="https://pbjkush.itch.io/" target="_blank">
+      View all games on Itch.io
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+    </a>
+  </div>
 </section>
 
-<!-- Contact -->
 <section class="contact" id="contact">
   <p class="section-label reveal">Get in Touch</p>
   <h2 class="reveal">Let's make<br>something together.</h2>
@@ -643,13 +798,11 @@
   </div>
 </section>
 
-<!-- Footer -->
 <footer>
   <p>Built with care · © 2026 Benjamin Kushner</p>
 </footer>
 
 <script>
-  // ── Custom cursor ──
   const dot = document.getElementById('cursorDot');
   let mouseX = 0, mouseY = 0, dotX = 0, dotY = 0;
 
@@ -670,26 +823,21 @@
   }
   animateCursor();
 
-  // Hover state for interactive elements
-  const hoverTargets = document.querySelectorAll('a, button, .skill-tag, .project-card');
+  const hoverTargets = document.querySelectorAll('a, button, .skill-tag, .project-card, .project-featured');
   hoverTargets.forEach(el => {
     el.addEventListener('mouseenter', () => dot.classList.add('hovering'));
     el.addEventListener('mouseleave', () => dot.classList.remove('hovering'));
   });
 
-  // ── Scroll reveal ──
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
   reveals.forEach(el => observer.observe(el));
 
-  // ── Tilt effect on project cards ──
   document.querySelectorAll('.tilt-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
@@ -707,7 +855,6 @@
     });
   });
 
-  // ── Parallax float on hero shapes ──
   document.addEventListener('mousemove', e => {
     const shapes = document.querySelectorAll('.shape');
     const x = (e.clientX / window.innerWidth - 0.5) * 2;
