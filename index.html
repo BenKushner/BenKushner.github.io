@@ -116,6 +116,8 @@
   .mini-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); border-color: var(--accent-deep); }
 
   .mini-thumb { width: 100%; aspect-ratio: 16 / 10; background: var(--bg-warm); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .mini-thumb-cover { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0.85; }
+  .mini-card:hover .mini-thumb-cover { transform: scale(1.08); opacity: 1; }
   .mini-thumb-icon { font-size: 2rem; opacity: 0.3; transition: opacity 0.3s ease, transform 0.3s ease; }
   .mini-card:hover .mini-thumb-icon { opacity: 0.6; transform: scale(1.15); }
   .mini-thumb::after { content: 'Play →'; position: absolute; inset: 0; background: rgba(212, 165, 116, 0.15); backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; color: var(--accent-glow); font-weight: 500; font-size: 0.8rem; letter-spacing: 0.08em; opacity: 0; transition: opacity 0.3s ease; }
@@ -282,35 +284,35 @@
   <p class="subsection-label reveal">Itch.io</p>
   <div class="mini-grid reveal">
     <a class="mini-card" href="https://pbjkush.itch.io/track-maniac" target="_blank">
-      <div class="mini-thumb"><span class="mini-thumb-icon">🏎️</span></div>
+      <div class="mini-thumb"><img src="itch-tinker-track.png" class="mini-thumb-cover" alt="Tinker Track"></div>
       <div class="mini-info"><h4>Tinker Track</h4><span>Racing · Play in browser</span></div>
     </a>
     <a class="mini-card" href="https://pbjkush.itch.io/something-goes-wrong" target="_blank">
-      <div class="mini-thumb"><span class="mini-thumb-icon">📖</span></div>
+      <div class="mini-thumb"><img src="itch-something-goes-wrong.png" class="mini-thumb-cover" alt="Something Goes Wrong"></div>
       <div class="mini-info"><h4>Something Goes Wrong</h4><span>Interactive Fiction · Play in browser</span></div>
     </a>
     <a class="mini-card" href="https://pbjkush.itch.io/remroftalp" target="_blank">
-      <div class="mini-thumb"><span class="mini-thumb-icon">🔄</span></div>
+      <div class="mini-thumb"><img src="itch-remroftalp.png" class="mini-thumb-cover" alt="remroftalP"></div>
       <div class="mini-info"><h4>remroftalP</h4><span>Puzzle · Play in browser</span></div>
     </a>
     <a class="mini-card" href="https://pbjkush.itch.io/underwater-accomplice" target="_blank">
-      <div class="mini-thumb"><span class="mini-thumb-icon">🐟</span></div>
+      <div class="mini-thumb"><img src="itch-underwater-accomplice.png" class="mini-thumb-cover" alt="Underwater Accomplice"></div>
       <div class="mini-info"><h4>Underwater Accomplice</h4><span>Shooter · Play in browser</span></div>
     </a>
     <a class="mini-card" href="https://pbjkush.itch.io/dolphania" target="_blank">
-      <div class="mini-thumb"><span class="mini-thumb-icon">🐬</span></div>
+      <div class="mini-thumb"><img src="itch-dolphania.png" class="mini-thumb-cover" alt="Dolphania"></div>
       <div class="mini-info"><h4>Dolphania</h4><span>Adventure · Play in browser</span></div>
     </a>
     <a class="mini-card" href="https://pbjkush.itch.io/other-half" target="_blank">
-      <div class="mini-thumb"><span class="mini-thumb-icon">🧩</span></div>
+      <div class="mini-thumb"><img src="itch-other-half.png" class="mini-thumb-cover" alt="The Other Half"></div>
       <div class="mini-info"><h4>The Other Half</h4><span>Puzzle · Play in browser</span></div>
     </a>
     <a class="mini-card" href="https://pbjkush.itch.io/shuffled-tales" target="_blank">
-      <div class="mini-thumb"><span class="mini-thumb-icon">🃏</span></div>
+      <div class="mini-thumb"><img src="itch-shuffled-tales.png" class="mini-thumb-cover" alt="Shuffled Tales"></div>
       <div class="mini-info"><h4>Shuffled Tales</h4><span>Simulation · Play in browser</span></div>
     </a>
     <a class="mini-card" href="https://pbjkush.itch.io/togather" target="_blank">
-      <div class="mini-thumb"><span class="mini-thumb-icon">🌾</span></div>
+      <div class="mini-thumb"><img src="itch-togather.png" class="mini-thumb-cover" alt="Togather"></div>
       <div class="mini-info"><h4>Togather</h4><span>Simulation · Play in browser</span></div>
     </a>
   </div>
