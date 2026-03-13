@@ -291,6 +291,10 @@
   }
 
   /* ── CTA Buttons ── */
+  .screenshot-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+  .screenshot-gallery img { width: 100%; border-radius: 10px; border: 1px solid var(--border); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
+  .screenshot-gallery img:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
   .cta-row {
     display: flex;
     gap: 1rem;
@@ -365,7 +369,7 @@
     nav { padding: 1.2rem 1.5rem; }
     .page-content { padding: 7rem 1.5rem 3rem; }
     .role-grid { grid-template-columns: 1fr; }
-    .features-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; } .screenshot-gallery { grid-template-columns: 1fr; }
     .stats-row { gap: 1.5rem; }
     .cursor-dot { display: none; }
   }
@@ -514,6 +518,16 @@
       <span class="tech-item">MetaVoiceChat</span>
       <span class="tech-item">Notion</span>
       <span class="tech-item">Git</span>
+    </div>
+  </div>
+
+  <div class="content-section reveal">
+    <h2>Screenshots</h2>
+    <div class="screenshot-gallery">
+      <img src="lpm-1.jpg" alt="Mouse sneaking past the cat in the basement">
+      <img src="lpm-2.jpg" alt="Mouse navigating the kitchen countertops">
+      <img src="lpm-3.jpg" alt="Mouse exploring with cat visible in the distance">
+      <img src="lpm-4.png" alt="Cat chasing a mouse on the kitchen counter">
     </div>
   </div>
 
