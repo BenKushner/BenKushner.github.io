@@ -170,10 +170,13 @@
   .carousel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease; }
   .carousel img.active { opacity: 1; }
   
-  /* Title-card fallback (shows if a screenshot fails to load) */
+  /* Title-card thumbnail (used for projects without screenshots) */
   .thumb-fallback { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; background: radial-gradient(circle at 30% 30%, rgba(212, 165, 116, 0.12), transparent 60%), var(--bg-warm); }
   .thumb-fallback strong { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 3.2rem; color: var(--text); letter-spacing: 0.02em; }
   .thumb-fallback span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); }
+  .thumb-fallback--mini { gap: 0.2rem; }
+  .thumb-fallback--mini strong { font-size: 1.7rem; }
+  .thumb-fallback--mini span { font-size: 0.6rem; }
 
   /* Icon thumb */
   .icon-thumb { width: 55%; height: auto; border-radius: 18px; opacity: 0.85; transition: opacity 0.3s ease, transform 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
@@ -255,27 +258,6 @@
     </div>
   </a>
 
-  <!-- UNREAL ENGINE: Work -->
-  <a class="project-featured tilt-card reveal" href="https://mosiac.itch.io/workproject" target="_blank" rel="noopener">
-    <div class="project-thumb">
-      <div class="thumb-fallback" aria-hidden="true"><strong>Work</strong><span>Unreal Engine</span></div>
-      <div class="carousel"><img src="https://img.itch.zone/aW1nLzE3ODI4MTUyLnBuZw==/original/RvfpnL.png" class="active" alt="Work gameplay screenshot" onerror="this.remove()"><img src="https://img.itch.zone/aW1nLzE3ODM0NjUxLnBuZw==/original/xzsxd2.png" alt="Work gameplay screenshot" onerror="this.remove()"></div>
-    </div>
-    <div class="project-info">
-      <p class="featured-label">Unreal Engine · Team Project</p>
-      <h3>Work</h3>
-      <p>A creepy point-and-click narrative game about creativity. You play a new employee drawing on an in-game computer while an unseen boss reacts with escalating, LLM-generated dialogue.</p>
-      <p>As lead programmer, I built the click-to-erase drawing system, mapped the player's mouse to a 3D mouse on the desk and a 2D cursor on screen, and integrated the LLM API that drives the boss.</p>
-      <div class="project-stats">
-        <div class="stat"><span class="stat-value">4</span><span class="stat-label">Person Team</span></div>
-        <div class="stat"><span class="stat-value">Lead</span><span class="stat-label">Programmer</span></div>
-      </div>
-      <div class="project-tags">
-        <span class="project-tag">Unreal Engine</span><span class="project-tag">Blueprints</span><span class="project-tag">LLM Integration</span><span class="project-tag">Windows</span>
-      </div>
-    </div>
-  </a>
-
   <!-- APP STORE GAMES -->
   <p class="subsection-label reveal">App Store</p>
   <div class="project-grid reveal">
@@ -352,9 +334,9 @@
       <div class="mini-thumb"><img src="itch-shuffled-tales.png" class="mini-thumb-cover" alt="Shuffled Tales"></div>
       <div class="mini-info"><h4>Shuffled Tales</h4><span>Simulation · Play in browser</span></div>
     </a>
-    <a class="mini-card" href="https://pbjkush.itch.io/togather" target="_blank">
-      <div class="mini-thumb"><img src="itch-togather.png" class="mini-thumb-cover" alt="Togather"></div>
-      <div class="mini-info"><h4>Togather</h4><span>Simulation · Play in browser</span></div>
+    <a class="mini-card" href="https://mosiac.itch.io/workproject" target="_blank" rel="noopener">
+      <div class="mini-thumb"><div class="thumb-fallback thumb-fallback--mini"><strong>Work</strong><span>Unreal Engine</span></div></div>
+      <div class="mini-info"><h4>Work</h4><span>Narrative · Unreal Engine</span></div>
     </a>
   </div>
 
