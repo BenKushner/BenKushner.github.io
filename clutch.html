@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clutch — Benjamin Kushner</title>
+<meta name="description" content="Clutch is a mobile basketball career game. Every game starts in the last two minutes: read your defender, beat the coverage, and take the last shot.">
+<meta property="og:title" content="Clutch: Basketball Career">
+<meta property="og:description" content="Down late. Ball in your hands. A mobile basketball career game, coming soon to iPhone.">
+<meta property="og:image" content="https://benkushner.github.io/clutch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg: #1a1816; --bg-warm: #211f1c; --bg-card: #2a2725; --text: #e8e0d6; --text-dim: #9a9189; --accent: #d4a574; --accent-glow: #e8c4a0; --accent-deep: #b8845a; --border: #3a3632; --radius: 14px; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; cursor: default; }
+  body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9998; }
+  .cursor-dot { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.15s ease, opacity 0.15s ease; transform: translate(-50%, -50%); mix-blend-mode: screen; opacity: 0; }
+  .cursor-dot.visible { opacity: 1; }
+  .cursor-dot.hovering { transform: translate(-50%, -50%) scale(3.5); background: var(--accent-glow); opacity: 0.5; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, var(--bg) 60%, transparent); }
+  .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--accent); letter-spacing: 0.02em; text-decoration: none; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.88rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; position: relative; transition: color 0.3s ease; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px; background: var(--accent); transition: width 0.3s ease; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .page-content { max-width: 900px; margin: 0 auto; padding: 8rem 3rem 4rem; }
+  .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-dim); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.05em; margin-bottom: 2.5rem; transition: color 0.3s ease; }
+  .back-link:hover { color: var(--accent); }
+  .back-link svg { transition: transform 0.3s ease; }
+  .back-link:hover svg { transform: translateX(-3px); }
+
+  .project-header { margin-bottom: 3rem; }
+  .project-header .featured-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.8rem; font-weight: 500; }
+  .project-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 400; margin-bottom: 1rem; line-height: 1.15; }
+  .project-header .tagline { font-size: 1.1rem; color: var(--text-dim); font-weight: 300; line-height: 1.7; max-width: 650px; }
+
+  .stats-row { display: flex; gap: 2.5rem; padding: 2rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 3rem; flex-wrap: wrap; }
+  .stat { display: flex; flex-direction: column; }
+  .stat-value { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--accent); }
+  .stat-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .content-section { margin-bottom: 3rem; }
+  .content-section h2 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 1.2rem; color: var(--text); }
+  .content-section p { color: var(--text-dim); font-weight: 300; font-size: 1rem; line-height: 1.8; margin-bottom: 1rem; }
+
+  .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.5rem; }
+  .feature { display: flex; gap: 0.8rem; align-items: flex-start; }
+  .feature-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.15rem; }
+  .feature-text { color: var(--text-dim); font-size: 0.9rem; font-weight: 300; line-height: 1.6; }
+  .feature-text strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 0.2rem; }
+
+  .tech-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1rem; }
+  .tech-item { padding: 0.6rem 1.2rem; border: 1px solid var(--border); border-radius: 50px; font-size: 0.85rem; color: var(--text-dim); transition: all 0.3s ease; cursor: default; }
+  .tech-item:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* Phone mockup screenshots */
+  .phone-gallery { display: flex; gap: 1.2rem; margin-top: 1.5rem; overflow-x: auto; padding-bottom: 1rem; }
+  .phone-frame { flex-shrink: 0; width: 180px; background: var(--bg-card); border-radius: 20px; border: 2px solid var(--border); padding: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .phone-frame:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+  .phone-frame img { width: 100%; border-radius: 14px; display: block; }
+
+  .cta-row { display: flex; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .cta-primary { display: inline-flex; align-items: center; gap: 0.75rem; background: var(--accent-deep); color: var(--bg); padding: 0.85rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; }
+  .cta-primary:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212, 165, 116, 0.2); }
+  .cta-secondary { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 2rem; border: 1px solid var(--border); border-radius: 50px; color: var(--text-dim); text-decoration: none; font-size: 0.95rem; font-weight: 400; transition: all 0.3s ease; }
+  .cta-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .page-links { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .page-links a { color: var(--text-dim); font-size: 0.85rem; border: 1px solid var(--border); padding: 0.5rem 1.2rem; border-radius: 50px; text-decoration: none; transition: all 0.3s ease; }
+  .page-links a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  footer { text-align: center; padding: 2rem 3rem; color: var(--text-dim); font-size: 0.78rem; border-top: 1px solid var(--border); max-width: 900px; margin: 0 auto; }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .page-content { padding: 7rem 1.5rem 3rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .stats-row { gap: 1.5rem; }
+    .phone-frame { width: 150px; }
+    .cursor-dot { display: none; }
+  }
+  @media (max-width: 500px) { .nav-links { gap: 1.5rem; } .nav-links a { font-size: 0.78rem; } .phone-frame { width: 130px; } }
+  .phone-frame video { width: 100%; border-radius: 14px; display: block; }
+  .video-row { display: flex; gap: 2rem; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; }
+  .video-row .phone-frame { width: 230px; }
+  .video-row .video-notes { flex: 1; min-width: 240px; }
+  .video-row .video-notes li { color: var(--text-dim); font-weight: 300; font-size: 0.95rem; line-height: 1.8; margin-left: 1.2rem; }
+  .cta-soon { display: inline-flex; align-items: center; gap: 0.75rem; background: var(--bg-card); color: var(--accent); padding: 0.85rem 2rem; border-radius: 50px; border: 1px solid var(--accent-deep); font-weight: 500; font-size: 0.95rem; }
+  @media (max-width: 500px) { .video-row .phone-frame { width: 200px; margin: 0 auto; } }
+</style>
+</head>
+<body>
+<div class="cursor-dot" id="cursorDot"></div>
+<nav>
+  <a href="index.html" class="nav-logo">Benjamin Kushner</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#projects">Work</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-content">
+  <a href="index.html#projects" class="back-link reveal">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    Back to all projects
+  </a>
+
+  <div class="project-header reveal">
+    <p class="featured-label">iOS · 2026 · Coming Soon</p>
+    <h1>Clutch</h1>
+    <p class="tagline">
+      A mobile basketball career game where every game starts in the last two
+      minutes. You play the star's possessions: read your defender, beat the
+      coverage, and take the shot that decides it. Between games you run the team.
+    </p>
+  </div>
+
+  <div class="stats-row reveal">
+    <div class="stat">
+      <span class="stat-value">4</span>
+      <span class="stat-label">Defender Tells</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">5</span>
+      <span class="stat-label">Pick &amp; Roll Coverages</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">Solo</span>
+      <span class="stat-label">Developer</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">Free</span>
+      <span class="stat-label">To Play</span>
+    </div>
+  </div>
+
+  <div class="content-section reveal">
+    <h2>About the Game</h2>
+    <p>
+      Clutch skips the first three and a half quarters. You inherit a score, a
+      handful of possessions and the ball. Each trip is a small puzzle: your
+      defender shows a tell, you answer with the move that beats it, and then you
+      have to time the release. Get it right and he is on the floor. Guess wrong
+      and it is a turnover.
+    </p>
+    <p>
+      Around those possessions sits a full career. You start as a rookie, earn XP
+      and spend it on ratings, keep your teammates happy enough to stay, manage a
+      salary cap from the front office, and try to get a four-team playoff bracket
+      to go your way. Energy carries between games, so how hard you run tonight
+      changes how you start the next one.
+    </p>
+  </div>
+
+  <div class="content-section reveal">
+    <h2>Gameplay</h2>
+    <div class="video-row">
+      <div class="phone-frame"><video src="clutch-gameplay.mp4" poster="clutch-ss2.jpg" controls muted loop playsinline preload="metadata"></video></div>
+      <ul class="video-notes">
+        <li>He leans, so you cross him over.</li>
+        <li>He crowds you, so you step back.</li>
+        <li>He sags off, so you shoot.</li>
+        <li>Or call for a screen and find the roller.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content-section reveal">
+    <h2>Screenshots</h2>
+    <div class="phone-gallery">
+      <div class="phone-frame"><img src="clutch-ss1.jpg" alt="Down late, ball in your hands" loading="lazy"></div>
+      <div class="phone-frame"><img src="clutch-ss2.jpg" alt="Read your defender" loading="lazy"></div>
+      <div class="phone-frame"><img src="clutch-ss3.jpg" alt="Start raw, become a legend" loading="lazy"></div>
+      <div class="phone-frame"><img src="clutch-ss4.jpg" alt="Create your player" loading="lazy"></div>
+      <div class="phone-frame"><img src="clutch-ss5.jpg" alt="Run the front office" loading="lazy"></div>
+      <div class="phone-frame"><img src="clutch-ss6.jpg" alt="Make it yours in the Locker" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="content-section reveal">
+    <h2>Key Features</h2>
+    <div class="features-grid">
+      <div class="feature">
+        <span class="feature-icon">🧠</span>
+        <div class="feature-text">
+          <strong>Read the Defender</strong>
+          Your man leans, crowds, sags or reaches on every trip. The right move puts him on the floor. The wrong one costs you the ball.
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🛡️</span>
+        <div class="feature-text">
+          <strong>Beat the Coverage</strong>
+          Call a pick and roll and the defense answers with drop, hedge, switch, ice or blitz. Each one has a counter, and they adjust if you repeat yourself.
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🎯</span>
+        <div class="feature-text">
+          <strong>Timing Shot Meter</strong>
+          Every shot is a release you have to time. Open looks give you a bigger green window. Tired legs and tight defense shrink it.
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🤝</span>
+        <div class="feature-text">
+          <strong>Teammates Remember</strong>
+          Feed your guys and they play harder for you. Freeze them out and they sulk, ask for raises, or ask for a trade.
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">📈</span>
+        <div class="feature-text">
+          <strong>Rookie to Legend</strong>
+          Earn XP, raise your ratings, level a signature move, collect badges and chase MVP across a full career.
+        </div>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🏆</span>
+        <div class="feature-text">
+          <strong>Run the Team</strong>
+          Sign shooters, manage the salary cap, set the game plan on defense, and take a four-team playoff to a best-of-three Finals.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-section reveal">
+    <h2>How It Was Built</h2>
+    <p>
+      I designed and directed Clutch solo: the rules, the systems, the economy and
+      every round of playtest feedback. The code was written through AI-assisted
+      development with Claude, in a single HTML5 canvas file that is wrapped for
+      iOS with Capacitor. All audio is synthesized at runtime, so the game ships
+      with no sound files.
+    </p>
+    <p>
+      Balance was tuned with bot simulations as well as hands-on play. Scripted
+      bots with different play styles ran hundreds of games and full ten-season
+      careers after each rules change, which is how win rates, energy costs,
+      progression pace and the in-game economy were checked before each build.
+    </p>
+    <div class="tech-grid">
+      <span class="tech-item">Game Design</span>
+      <span class="tech-item">Systems &amp; Balance</span>
+      <span class="tech-item">JavaScript</span>
+      <span class="tech-item">HTML5 Canvas</span>
+      <span class="tech-item">Web Audio</span>
+      <span class="tech-item">Capacitor</span>
+      <span class="tech-item">iOS</span>
+      <span class="tech-item">AI-Assisted Development</span>
+    </div>
+  </div>
+
+  <div class="content-section reveal">
+    <h2>Links</h2>
+    <div class="page-links">
+      <a href="clutch-privacy.html">Privacy Policy</a>
+      <a href="clutch-terms.html">Terms of Use</a>
+      <a href="clutch-support.html">Support</a>
+    </div>
+  </div>
+
+  <div class="cta-row reveal">
+    <!-- When the game is live, replace this span with:
+         <a href="YOUR_APP_STORE_URL" target="_blank" class="cta-primary">View on App Store</a> -->
+    <span class="cta-soon">Coming soon to the App Store</span>
+    <a href="index.html#projects" class="cta-secondary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Back to projects
+    </a>
+  </div>
+</div>
+
+<footer><p>Built with care · © 2026 Benjamin Kushner</p></footer>
+
+<script>
+  const dot=document.getElementById('cursorDot');let mouseX=0,mouseY=0,dotX=0,dotY=0;
+  document.addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;dot.classList.add('visible')});
+  document.addEventListener('mouseleave',()=>dot.classList.remove('visible'));
+  function animateCursor(){dotX+=(mouseX-dotX)*0.15;dotY+=(mouseY-dotY)*0.15;dot.style.left=dotX+'px';dot.style.top=dotY+'px';requestAnimationFrame(animateCursor)}animateCursor();
+  document.querySelectorAll('a,button,.tech-item,.phone-frame').forEach(el=>{el.addEventListener('mouseenter',()=>dot.classList.add('hovering'));el.addEventListener('mouseleave',()=>dot.classList.remove('hovering'))});
+  const reveals=document.querySelectorAll('.reveal');const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible')})},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});reveals.forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
